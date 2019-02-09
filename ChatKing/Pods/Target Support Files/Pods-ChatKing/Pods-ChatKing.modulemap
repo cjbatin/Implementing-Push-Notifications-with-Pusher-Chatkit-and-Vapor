@@ -1,0 +1,6 @@
+framework module Pods_ChatKing {
+  umbrella header "Pods-ChatKing-umbrella.h"
+
+  export *
+  module * { export * }
+}

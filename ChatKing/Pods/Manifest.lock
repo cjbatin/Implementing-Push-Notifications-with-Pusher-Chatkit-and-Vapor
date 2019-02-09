@@ -1,0 +1,52 @@
+PODS:
+  - Alamofire (4.8.0)
+  - BeamsChatkit (1.2.4)
+  - MarqueeLabel/Swift (3.2.0)
+  - MessageInputBar/Core (0.4.1)
+  - MessageKit (2.0.0):
+    - MessageInputBar/Core
+  - NotificationBannerSwift (2.0.1):
+    - MarqueeLabel/Swift (~> 3.2.0)
+    - SnapKit (~> 4.2.0)
+  - PusherChatkit (1.2.3):
+    - BeamsChatkit (~> 1.2)
+    - PusherPlatform (~> 0.6)
+  - PusherPlatform (0.6.2)
+  - PushNotifications (1.1.0)
+  - SnapKit (4.2.0)
+
+DEPENDENCIES:
+  - Alamofire
+  - MessageKit
+  - NotificationBannerSwift
+  - PusherChatkit
+  - PushNotifications
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - BeamsChatkit
+    - MarqueeLabel
+    - MessageInputBar
+    - MessageKit
+    - NotificationBannerSwift
+    - PusherChatkit
+    - PusherPlatform
+    - PushNotifications
+    - SnapKit
+
+SPEC CHECKSUMS:
+  Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
+  BeamsChatkit: 8d6da00ded34ee11116e9e38427a20e04301d796
+  MarqueeLabel: 440a502b91a9179bd98f9fff00ba1150650a1c0e
+  MessageInputBar: e81c7535347f1f7b923de7080409a535a004b6e4
+  MessageKit: 29c1c87e5a396d2ca7a3f712e5171dc9aba42a1e
+  NotificationBannerSwift: 007774aa590cc9680647b92b2f217bef5c00c32c
+  PusherChatkit: 7e0f6ffc4bf3122dd4cf392573e7cf6145203e7e
+  PusherPlatform: f4380cd85376e27f89bf7c41323908c019099ebf
+  PushNotifications: 8eee2fb66f3870025fe037883c88f5861f315bd0
+  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
+
+PODFILE CHECKSUM: 00175d9ce50c8aa4b211817cfcd4e32d94d142fe
+
+COCOAPODS: 1.5.3

@@ -8,7 +8,7 @@ struct UserController: RouteCollection {
     func boot(router: Router) throws {
         let usersRoute = router.grouped("api", "users")
         usersRoute.post("new", use: createHandler)
-        usersRoute.get("login", use: find)
+        usersRoute.post("login", use: find)
         usersRoute.post(User.parameter, "rooms", Room.parameter, use: addRoomsHandler)
         usersRoute.get(User.parameter, "rooms", use: getRoomsHandler)
     }
