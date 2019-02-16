@@ -27,6 +27,5 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     var migrations = MigrationConfig()
     migrations.add(model: User.self, database: .sqlite)
     migrations.add(model: Room.self, database: .sqlite)
-    migrations.add(model: UserRoomPivot.self, database: .sqlite)
     services.register(migrations) 
 }

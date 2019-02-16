@@ -14,7 +14,6 @@
 		51F5EA14220EEFF1006C6C64 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51F5EA13220EEFF1006C6C64 /* Assets.xcassets */; };
 		51F5EA17220EEFF1006C6C64 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51F5EA15220EEFF1006C6C64 /* LaunchScreen.storyboard */; };
 		51F5EA20220EF646006C6C64 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F5EA1F220EF646006C6C64 /* LoginViewController.swift */; };
-		51F5EA22220EF6C8006C6C64 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F5EA21220EF6C8006C6C64 /* Constants.swift */; };
 		51F5EC57220EFF02006C6C64 /* RoomsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F5EC56220EFF02006C6C64 /* RoomsTableViewController.swift */; };
 		51F5EC59220EFFD4006C6C64 /* RoomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F5EC58220EFFD4006C6C64 /* RoomCell.swift */; };
 		51F5EC5B220EFFF3006C6C64 /* RoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F5EC5A220EFFF3006C6C64 /* RoomViewController.swift */; };
@@ -32,7 +31,6 @@
 		51F5EA18220EEFF1006C6C64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		51F5EA1E220EF2A4006C6C64 /* ChatKing.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChatKing.entitlements; sourceTree = "<group>"; };
 		51F5EA1F220EF646006C6C64 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		51F5EA21220EF6C8006C6C64 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		51F5EC56220EFF02006C6C64 /* RoomsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsTableViewController.swift; sourceTree = "<group>"; };
 		51F5EC58220EFFD4006C6C64 /* RoomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCell.swift; sourceTree = "<group>"; };
 		51F5EC5A220EFFF3006C6C64 /* RoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomViewController.swift; sourceTree = "<group>"; };
@@ -92,7 +90,6 @@
 				51F5EA15220EEFF1006C6C64 /* LaunchScreen.storyboard */,
 				51F5EA18220EEFF1006C6C64 /* Info.plist */,
 				51F5EA1F220EF646006C6C64 /* LoginViewController.swift */,
-				51F5EA21220EF6C8006C6C64 /* Constants.swift */,
 				51F5EC56220EFF02006C6C64 /* RoomsTableViewController.swift */,
 				51F5EC58220EFFD4006C6C64 /* RoomCell.swift */,
 				51F5EC5A220EFFF3006C6C64 /* RoomViewController.swift */,
@@ -146,6 +143,9 @@
 					51F5EA08220EEFED006C6C64 = {
 						CreatedOnToolsVersion = 10.1;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -262,7 +262,6 @@
 				51F5EA0D220EEFED006C6C64 /* AppDelegate.swift in Sources */,
 				51F5EC5D220F002D006C6C64 /* Message.swift in Sources */,
 				51F5EC59220EFFD4006C6C64 /* RoomCell.swift in Sources */,
-				51F5EA22220EF6C8006C6C64 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

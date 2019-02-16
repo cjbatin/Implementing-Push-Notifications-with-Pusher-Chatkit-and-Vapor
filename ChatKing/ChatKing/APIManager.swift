@@ -9,19 +9,31 @@
 import Foundation
 import Alamofire
 import NotificationBannerSwift
+import PusherChatkit
 
-struct CurrentUser: Codable {
+// 1
+struct User: Codable {
     var id: String
     var username: String
 }
-
+// 2
 struct Room: Codable {
     var name: String
 }
 
+// 3
+let baseURL = "https://7c8e8757.ngrok.io/"
+var chatManager: ChatManager?
+struct Constants {
+    static let createUserURL = URL.init(string: "\(baseURL)/api/users/new")!
+    static let loginURL = URL.init(string: "\(baseURL)/api/users/login")!
+    static let chatkitInstance = "v1:us1:1a87e1e8-eca4-4109-8b5d-1dce3bdd6eaa"
+}
+
 class APIManager {
 
-    func createNewUser(username: String, withCompletion completion: @escaping (CurrentUser?) -> Void) {
+    // 4
+    func createNewUser(username: String, withCompletion completion: @escaping (User?) -> Void) {
         let parameters: Parameters = [
             "username": username
         ]
@@ -31,7 +43,7 @@ class APIManager {
                 if let data = response.data {
                     do {
                         let decoder = JSONDecoder.init()
-                        let currentUser = try decoder.decode(CurrentUser.self, from: data)
+                        let currentUser = try decoder.decode(User.self, from: data)
                         completion(currentUser)
                     } catch {
                         completion(nil)
@@ -45,7 +57,8 @@ class APIManager {
         }
     }
 
-    func login(username: String, withCompletion completion: @escaping (CurrentUser?) -> Void) {
+    // 5
+    func login(username: String, withCompletion completion: @escaping (User?) -> Void) {
         let parameters: Parameters = [
             "username": username
         ]
@@ -55,7 +68,7 @@ class APIManager {
                 if let data = response.data {
                     do {
                         let decoder = JSONDecoder.init()
-                        let currentUser = try decoder.decode(CurrentUser.self, from: data)
+                        let currentUser = try decoder.decode(User.self, from: data)
                         completion(currentUser)
                     } catch {
                         completion(nil)
@@ -69,10 +82,11 @@ class APIManager {
         }
     }
 
+    // 6
     func createRoom(userId: String, room: Room, withCompletion completion: @escaping (Room?) -> Void) {
         let parameters = [
-            "name": room.name
-        ]
+            "name": room.name,
+            ]
         let url = URL.init(string: "\(baseURL)/api/rooms/new/user/\(userId)")!
         Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response) in
             let statusCode = response.response?.statusCode ?? -1
@@ -93,5 +107,4 @@ class APIManager {
             }
         }
     }
-
 }

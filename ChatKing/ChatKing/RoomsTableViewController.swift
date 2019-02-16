@@ -5,12 +5,10 @@
 //  Created by Christopher Batin on 09/02/2019.
 //  Copyright © 2019 Christopher Batin. All rights reserved.
 //
-
 import UIKit
 import PusherChatkit
 class RoomsTableViewController: UITableViewController {
     //1
-    var chatManager: ChatManager!
     var currentUser: PCCurrentUser?
     var currentUserId: String!
     var rooms: [PCRoom]? {
@@ -39,31 +37,35 @@ class RoomsTableViewController: UITableViewController {
         reloadRooms()
     }
 
+    // 3
     @objc func refresh(_ sender: AnyObject) {
         reloadRooms()
     }
 
+    // 4
     private func reloadRooms() {
-        chatManager.connect(delegate: self) { [unowned self] currentUser, error in
+        chatManager?.connect(delegate: self) { [unowned self] currentUser, error in
             guard error == nil else {
                 print("Error connecting: \(error!.localizedDescription)")
                 return
             }
             print("Connected!")
-
             guard let currentUser = currentUser else { return }
             self.currentUser = currentUser
+            self.currentUser?.enablePushNotifications()
             self.rooms = self.currentUser?.rooms
             self.getJoinableRooms()
         }
     }
-    //4
+    // 5
     private func getJoinableRooms() {
         self.currentUser?.getJoinableRooms(completionHandler: { (userRooms, error) in
             for room in userRooms! {
                 self.currentUser?.joinRoom(room, completionHandler: { (room, error) in
                     if error == nil {
                         self.rooms = self.currentUser?.rooms
+                    }
+                    if userRooms?.last == room {
                         DispatchQueue.main.async {
                             self.refreshControl?.endRefreshing()
                         }
@@ -78,6 +80,7 @@ class RoomsTableViewController: UITableViewController {
         })
     }
 
+    //6
     @IBAction func AddRoomButtonPressed(_ sender: Any) {
         let alertController = UIAlertController(title: "Add new room", message: "", preferredStyle: .alert)
         alertController.addTextField(configurationHandler: { (textField) in
@@ -85,7 +88,13 @@ class RoomsTableViewController: UITableViewController {
         })
         let saveAction = UIAlertAction(title: "Save", style: .default, handler: { alert -> Void in
             let textField = alertController.textFields![0] as UITextField
-            self.createNewRoom(withName: textField.text ?? "")
+            APIManager().createRoom(userId: self.currentUserId,
+                                    room: Room(name: textField.text ?? "") ) { (room) in
+                let deadlineTime = DispatchTime.now() + .seconds(1)
+                DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
+                    self.reloadRooms()
+                }
+            }
         })
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: { (action : UIAlertAction!) -> Void in })
 
@@ -96,18 +105,6 @@ class RoomsTableViewController: UITableViewController {
         self.present(alertController, animated: true, completion: nil)
     }
 
-    //Create a new public general room
-    //5
-    private func createNewRoom(withName name: String) {
-        APIManager().createRoom(userId: self.currentUserId,
-                                room: Room(name: name) ) { (room) in
-            let deadlineTime = DispatchTime.now() + .seconds(1)
-            DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
-                self.reloadRooms()
-            }
-        }
-    }
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toChatRoom" {
             let vc = segue.destination as? RoomViewController
@@ -116,7 +113,6 @@ class RoomsTableViewController: UITableViewController {
         }
     }
 }
-
 
 extension RoomsTableViewController: PCChatManagerDelegate {}
 

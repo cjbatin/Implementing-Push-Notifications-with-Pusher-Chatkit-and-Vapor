@@ -20,24 +20,15 @@ class RoomViewController: MessagesViewController, PCRoomDelegate {
     var currentRoom: PCRoom? = nil
     var currentUser: PCCurrentUser? = nil
 
-    var chatManager: ChatManager?
     //2
     override func viewDidLoad() {
         super.viewDidLoad()
         configureMessageKit()
         navigationItem.title = currentRoom?.name
-        let tokenProvider = PCTokenProvider(
-            url: "\(baseURL)/auth",
-            requestInjector: { req -> PCTokenProviderRequest in
-                req.addQueryItems([URLQueryItem(name: "user_id", value: self.currentUser?.id)])
-                return req
-        })
-
         currentUser?.subscribeToRoom(room: currentRoom!, roomDelegate: self, completionHandler: { (error) in
             if error != nil {
                 print(error as Any)
             }
-            self.fetchMessages()
         })
     }
 

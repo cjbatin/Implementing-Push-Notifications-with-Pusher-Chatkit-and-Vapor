@@ -7,7 +7,6 @@ struct RoomController: RouteCollection {
         roomsRoute.post("new", "user", User.parameter, use: createHandler)
         roomsRoute.get(use: getAllHandler)
         roomsRoute.get(Room.parameter, use: getHandler)
-        roomsRoute.get(Room.parameter, "users", use: getUsersHandler)
     }
     // 2
     func createHandler(
@@ -28,7 +27,7 @@ struct RoomController: RouteCollection {
                 _ = try! req.client().post(url) { post in
                     post.http.headers.bearerAuthorization = bearer
                     post.http.headers.add(name: HTTPHeaderName.contentType.description, value: "application/json")
-                        try post.content.encode(Room.init(name: room.name))
+                    try post.content.encode(Room.init(name: room.name))
                 }
             })
             return newRoom
@@ -43,17 +42,5 @@ struct RoomController: RouteCollection {
     // 4
     func getHandler(_ req: Request) throws -> Future<Room> {
         return try req.parameters.next(Room.self)
-    }
-    // 5
-    func getRoomsHandler(_ req: Request) throws -> Future<[Room]> {
-        return try req.parameters.next(User.self).flatMap(to: [Room].self) { user in
-            try user.rooms.query(on: req).all()
-        }
-    }
-    // 6
-    func getUsersHandler(_ req: Request) throws -> Future<[User]> {
-        return try req.parameters.next(Room.self).flatMap(to: [User].self) { room in
-            try room.users.query(on: req).all()
-        }
     }
 }

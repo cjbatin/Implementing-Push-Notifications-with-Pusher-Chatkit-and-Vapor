@@ -14,7 +14,7 @@ class LoginViewController: UIViewController {
 
     @IBOutlet weak var usernameField: UITextField!
 
-    var currentUser: CurrentUser?
+    var currentUser: User?
 
     @IBAction func loginButtonTapped(_ sender: Any) {
         signInUser()

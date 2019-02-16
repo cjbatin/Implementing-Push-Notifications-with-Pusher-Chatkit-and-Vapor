@@ -9,9 +9,8 @@ struct UserController: RouteCollection {
         let usersRoute = router.grouped("api", "users")
         usersRoute.post("new", use: createHandler)
         usersRoute.post("login", use: find)
-        usersRoute.post(User.parameter, "rooms", Room.parameter, use: addRoomsHandler)
-        usersRoute.get(User.parameter, "rooms", use: getRoomsHandler)
     }
+
     // 2
     func find(_ req: Request) throws -> Future<User> {
         return try req.content.decode(User.self).flatMap({ user in
@@ -41,19 +40,6 @@ struct UserController: RouteCollection {
                 }
             })
             return newUser
-        }
-    }
-
-    // 4
-    func addRoomsHandler(_ req: Request) throws -> Future<HTTPStatus> {
-        return try flatMap(to: HTTPStatus.self, req.parameters.next(User.self), req.parameters.next(Room.self)) { user, room in
-            return user.rooms.attach(room, on: req).transform(to: .created)
-        }
-    }
-    // 5
-    func getRoomsHandler(_ req: Request) throws -> Future<[Room]> {
-        return try req.parameters.next(User.self).flatMap(to: [Room].self) { user in
-            try user.rooms.query(on: req).all()
         }
     }
 }

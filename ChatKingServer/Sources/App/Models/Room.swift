@@ -30,9 +30,3 @@ extension Room: SQLiteUUIDModel {
 }
 extension Room: Migration {}
 extension Room: Parameter {}
-
-extension Room {
-    var users: Siblings<Room, User, UserRoomPivot> {
-        return siblings()
-    }
-}
