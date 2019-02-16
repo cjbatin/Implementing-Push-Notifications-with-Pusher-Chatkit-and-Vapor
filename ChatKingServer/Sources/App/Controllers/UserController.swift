@@ -25,7 +25,7 @@ struct UserController: RouteCollection {
     // 3
     func createHandler(_ req: Request) throws -> Future<User> {
         return try req.content.decode(User.self).flatMap { user in
-            let chatkitEndPoint = "https://us1.pusherplatform.io/services/chatkit/v2/1a87e1e8-eca4-4109-8b5d-1dce3bdd6eaa/users"
+            let chatkitEndPoint = "https://us1.pusherplatform.io/services/chatkit/v2/YOUR_CHATKIT_INSTANCE_ID/users"
             guard let url = URL(string: chatkitEndPoint) else {
                 throw Abort.init(HTTPResponseStatus.internalServerError)
             }

@@ -12,7 +12,7 @@ struct RoomController: RouteCollection {
     func createHandler(
         _ req: Request) throws -> Future<Room> {
         return try flatMap(to: Room.self, req.content.decode(Room.self), req.parameters.next(User.self)) { room, user in
-            let chatkitEndPoint = "https://us1.pusherplatform.io/services/chatkit/v2/1a87e1e8-eca4-4109-8b5d-1dce3bdd6eaa/rooms"
+            let chatkitEndPoint = "https://us1.pusherplatform.io/services/chatkit/v2/YOUR_CHATKIT_INSTANCE_ID/rooms"
             guard let url = URL(string: chatkitEndPoint) else {
                 throw Abort.init(HTTPResponseStatus.internalServerError)
             }

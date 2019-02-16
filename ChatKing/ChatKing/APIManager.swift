@@ -22,12 +22,13 @@ struct Room: Codable {
 }
 
 // 3
-let baseURL = "https://7c8e8757.ngrok.io/"
+let baseURL = "YOUR_NGROK_HTTPS_URL"
 var chatManager: ChatManager?
 struct Constants {
     static let createUserURL = URL.init(string: "\(baseURL)/api/users/new")!
     static let loginURL = URL.init(string: "\(baseURL)/api/users/login")!
-    static let chatkitInstance = "v1:us1:1a87e1e8-eca4-4109-8b5d-1dce3bdd6eaa"
+    //This is the full form with the locator as well
+    static let chatkitInstance = "YOUR_CHATKIT_INSTANCE_ID"
 }
 
 class APIManager {
