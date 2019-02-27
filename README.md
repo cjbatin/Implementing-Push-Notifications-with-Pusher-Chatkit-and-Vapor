@@ -2,9 +2,9 @@
 
 An example project that accompanies my tutorial on using Chatkit with notifications
 
-Tutorial Part 1: https://pusher.com/tutorials/rich-notifications-vapor-part-1
+Tutorial Part 1: https://pusher.com/tutorials/push-notifications-chatkit-vapor-part-1
 
-Tutorial Part 2: https://pusher.com/tutorials/rich-notifications-vapor-part-2
+Tutorial Part 2: https://pusher.com/tutorials/push-notifications-chatkit-vapor-part-2
 ## Getting Started
 
 iOS - Clone or download the repo onto your machine.
