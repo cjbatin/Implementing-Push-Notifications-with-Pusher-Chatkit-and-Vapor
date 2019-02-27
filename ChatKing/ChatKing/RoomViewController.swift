@@ -69,27 +69,6 @@ class RoomViewController: MessagesViewController, PCRoomDelegate {
             self.messagesCollectionView.scrollToBottom()
         }
     }
-
-    //4
-    func fetchMessages() {
-        currentUser?.fetchMessagesFromRoom(currentRoom!, completionHandler: { (roomMessages, error) in
-            if error != nil {
-                print(error as Any)
-            }
-            guard let roomMessages = roomMessages else { return }
-            DispatchQueue.main.async {
-                for message in roomMessages {
-                    let sender = Sender.init(id: message.sender.id,
-                                             displayName: message.sender.displayName)
-                    self.messages.append(Message.init(text: message.text ,
-                                                      sender: sender,
-                                                      messageId: String(message.id),
-                                                      date: message.createdAtDate))
-                }
-                self.messagesCollectionView.reloadData()
-            }
-        })
-    }
 }
 
 
@@ -172,5 +151,4 @@ extension RoomViewController: MessagesDataSource {
     func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
         return self.messages.count
     }
-
 }
