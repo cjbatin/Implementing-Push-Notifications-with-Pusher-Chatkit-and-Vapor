@@ -31,9 +31,9 @@ class RoomsTableViewController: UITableViewController {
             requestInjector: { req -> PCTokenProviderRequest in
                 return req
         })
-        chatManager = ChatManager.init(instanceLocator: Constants.chatkitInstance,
-                                       tokenProvider: tokenProvider,
-                                       userID: currentUserId)
+        chatManager = ChatManager(instanceLocator: Constants.chatkitInstance,
+                                  tokenProvider: tokenProvider,
+                                  userID: currentUserId)
         reloadRooms()
     }
 
